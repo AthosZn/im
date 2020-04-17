@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import okhttp3.OkHttpClient;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午10:08:36
- * 
+ *
  */
 @Configuration
 public class BeanConfiguration {

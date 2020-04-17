@@ -3,21 +3,21 @@ package ai.yunxi.im.common.pojo;
 import java.io.Serializable;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午9:14:28
  * 服务端基本信息
  */
 public class ServerInfo implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2230742812761280401L;
 	private String ip;
 	private Integer nettyPort;
 	private Integer httpPort;
-	
+
 	public ServerInfo() {
 	}
 	public ServerInfo(String ip, Integer nettyPort, Integer httpPort) {
@@ -44,5 +44,5 @@ public class ServerInfo implements Serializable {
 	public void setHttpPort(Integer httpPort) {
 		this.httpPort = httpPort;
 	}
-	
+
 }

@@ -9,16 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ai.yunxi.im.server.zk.RegisterToZK;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午2:59:36
- * 
+ *
  */
 @SpringBootApplication
 public class IMServerApplication implements CommandLineRunner {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMServerApplication.class);
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(IMServerApplication.class, args);
 		LOGGER.info("启动 Service 服务成功");

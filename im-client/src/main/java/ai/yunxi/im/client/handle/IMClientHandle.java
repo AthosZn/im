@@ -10,18 +10,18 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午10:01:02
- * 
+ *
  */
 public class IMClientHandle extends ChannelInboundHandlerAdapter {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMClientHandle.class);
-	
+
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		
+
 		MessageProto.MessageProtocol message = (MessageProto.MessageProtocol) msg;
 		LOGGER.info("客户端接收到消息："+message.getContent());
 	}
@@ -41,5 +41,5 @@ public class IMClientHandle extends ChannelInboundHandlerAdapter {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

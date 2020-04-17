@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Netty WebSocket</title>
+</head>
+<body>
+<br>
+<script type="text/javascript">
+    var websocket;
+    if(!window.WebSocket){
+        window.WebSocket=window.MozWebSocket;
+    }
+    if(window.WebSocket){
+        websocket=new WebSocket("ws://localhost:20000/web");
+        websocket.onmessage=function (event) {
+            console.log("websocket接受消息"+event.data);
+            var text=document.getElementById('responseText');
+            text.value="";
+            text.value=event.data;
+        }
+        websocket.onopen=function (event) {
+            console.log("websocket打开");
+            var text=document.getElementById('responseText');
+            text.value="";
+            text.value="打开websocket服务正常";
+        }
+        websocket.onclose=function (event) {
+            console.log("websocket关闭");
+            var text=document.getElementById('responseText');
+            text.value="";
+            text.value="关闭websocket服务";
+        }
+        websocket.onerror=function (event) {
+            console.log("websocket异常");
+            var text=document.getElementById('responseText');
+            text.value="";
+            text.value="websocket服务异常";
+
+        }
+    }else{
+        alert("你的浏览器不支持WebSocket");
+    }
+
+    function send(message) {
+        if(websocket){
+            if(websocket.readyState==WebSocket.OPEN){
+                console.log("通过websocket发送消息");
+                websocket.send(message);
+            }
+        }else{
+            alert("未建立websocket连接");
+        }
+    }
+</script>
+
+<form onsubmit="return false;">
+    <input type="text" name="message" value="Netty实践"/>
+    <br><br>
+    <input type="button" value="发送消息" onclick="send (this.form.message.value)"/>
+    <h3>应答消息</h3>
+    <textarea id="responseText" style="width: 500px;height: 300px;"></textarea>
+</form>
+
+</body>
+</html>

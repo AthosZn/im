@@ -40,8 +40,8 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午9:34:17
  * 客户端启动初始化：
  * 1、与服务端建立连接
@@ -54,12 +54,12 @@ public class IMClientInit {
 	private ServerInfo server;
 	public Channel channel;
 	private EventLoopGroup group = new NioEventLoopGroup(0, new DefaultThreadFactory("im-client-work"));
-	
+
 	@Autowired
 	private InitConfiguration conf;
     @Autowired
     private OkHttpClient okHttpClient;
-    
+
 	@PostConstruct
 	public void start() throws Exception{
 		if(server != null){
@@ -72,9 +72,9 @@ public class IMClientInit {
 		startClient();
 		//3.登录到服务端
 		registerToServer();
-		
+
 	}
-	
+
 	/**
 	 * 与服务端通信
 	 */
@@ -97,7 +97,7 @@ public class IMClientInit {
 			jsonObject.put("userId",conf.getUserId());
 			jsonObject.put("userName",conf.getUserName());
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
-			
+
 			Request request = new Request.Builder()
 			        .url(conf.getRouteLoginUrl())
 			        .post(requestBody)
@@ -137,7 +137,7 @@ public class IMClientInit {
 						    pipeline.addLast(new ProtobufDecoder(MessageProto.MessageProtocol.getDefaultInstance()));
 						    pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
 						    pipeline.addLast(new ProtobufEncoder());
-						    
+
 							pipeline.addLast(new IMClientHandle());
 						}
 					});
@@ -154,9 +154,9 @@ public class IMClientInit {
 		} finally {
 //			group.shutdownGracefully();
 		}
-		
+
 	}
-	
+
 	/**
 	 * 客户端发送消息
 	 **/
@@ -168,20 +168,21 @@ public class IMClientInit {
 			jsonObject.put("userId",chat.getUserId());
 			jsonObject.put("content",chat.getContent());
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
-			
+
 			Request request = new Request.Builder()
 			        .url(conf.getRouteChatUrl())
 			        .post(requestBody)
 			        .build();
 			Response response = okHttpClient.newCall(request).execute() ;
 			if (!response.isSuccessful()){
-			    throw new IOException("Unexpected code " + response);
+			    throw
+						new IOException("Unexpected code " + response);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 清理客户端登录
 	 **/
@@ -190,7 +191,7 @@ public class IMClientInit {
 		logoutServer();
 		server = null;
 	}
-	
+
 	/**
 	 * 客户端登出命令-路由端处理
 	 **/
@@ -199,7 +200,7 @@ public class IMClientInit {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId",conf.getUserId());
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
-			
+
 			Request request = new Request.Builder()
 			        .url(conf.getRouteLogoutUrl())
 			        .post(requestBody)
@@ -222,7 +223,7 @@ public class IMClientInit {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId",conf.getUserId());
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
-			
+
 			Request request = new Request.Builder()
 			        .url("http://"+server.getIp()+":"+server.getHttpPort()+"/clientLogout")
 			        .post(requestBody)
@@ -236,7 +237,7 @@ public class IMClientInit {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void restart() throws Exception {
 		//1.清理客户端信息（路由）
 		logoutRoute();

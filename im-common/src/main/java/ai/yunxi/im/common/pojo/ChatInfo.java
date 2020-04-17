@@ -3,22 +3,22 @@ package ai.yunxi.im.common.pojo;
 import java.io.Serializable;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年3月7日 下午5:27:21
- * 
+ *
  */
 public class ChatInfo implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1360647504610967672L;
 	private String command;
 	private Long time;
 	private Integer userId;
 	private String content;
-	
+
 	public ChatInfo(String command, Long time, Integer userId, String content) {
 		this.command = command;
 		this.time = time;
@@ -51,5 +51,5 @@ public class ChatInfo implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 }

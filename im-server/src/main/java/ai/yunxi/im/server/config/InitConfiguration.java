@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 小五老师-云析学院
+ * @author Athos
  * @createTime 2019年3月12日 下午8:56:48
- * 
+ *
  */
 @Component
 public class InitConfiguration {
@@ -15,14 +15,14 @@ public class InitConfiguration {
 	private int httpPort;
 	@Value("${im.server.port}")
 	private int nettyPort;
-	
+
 	@Value("${im.zk.switch}")
 	private boolean zkSwitch;
 	@Value("${im.zk.root}")
 	private String root;
 	@Value("${im.zk.addr}")
 	private String addr;
-	
+
 	@Value("${im.route.logout.url}")
     private String routeLogoutUrl;
 	public int getHttpPort() {

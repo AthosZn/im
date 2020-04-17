@@ -25,10 +25,10 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月27日 下午1:35:52
- * 
+ *
  */
 @Component
 public class IMServerInit {
@@ -37,10 +37,10 @@ public class IMServerInit {
 
 	private EventLoopGroup acceptorGroup = new NioEventLoopGroup();
 	private EventLoopGroup workerGroup = new NioEventLoopGroup();
-	
+
 	@Autowired
 	private InitConfiguration conf;
-	
+
 	@PostConstruct
 	public void start() throws Exception{
 		try {
@@ -62,7 +62,7 @@ public class IMServerInit {
 					    pipeline.addLast(new ProtobufDecoder(MessageProto.MessageProtocol.getDefaultInstance()));
 					    pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
 					    pipeline.addLast(new ProtobufEncoder());
-					    
+
 						pipeline.addLast(new IMServerHandle());
 					}
 				});

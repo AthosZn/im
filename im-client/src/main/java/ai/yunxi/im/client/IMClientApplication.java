@@ -9,16 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ai.yunxi.im.client.scanner.Scan;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午2:59:36
- * 
+ *
  */
 @SpringBootApplication
 public class IMClientApplication implements CommandLineRunner {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMClientApplication.class);
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(IMClientApplication.class, args);
 		LOGGER.info("启动 Client 服务成功");

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 小五老师-云析学院
+ * @author Athos
  * @createTime 2019年3月12日 下午8:56:48
- * 
+ *
  */
 @Component
 public class InitConfiguration {
@@ -21,7 +21,7 @@ public class InitConfiguration {
 	private String routeChatUrl;
 	@Value("${im.route.logout.url}")
     private String routeLogoutUrl;
-	
+
 	public int getUserId() {
 		return userId;
 	}

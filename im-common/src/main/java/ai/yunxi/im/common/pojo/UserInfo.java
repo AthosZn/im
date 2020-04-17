@@ -1,9 +1,9 @@
 package ai.yunxi.im.common.pojo;
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月27日 下午3:29:38
- * 
+ *
  */
 
 import java.io.Serializable;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 4227244327808705724L;
 	private Integer userId;
@@ -28,5 +28,5 @@ public class UserInfo implements Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 }

@@ -18,8 +18,8 @@ import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午3:10:41
  * 服务端处理器
  */
@@ -53,13 +53,13 @@ public class IMServerController {
 			}
 		}
 	}
-	
+
 	/**
 	 * 服务端处理客户端下线事件
 	 **/
 	@RequestMapping(value="/clientLogout", method=RequestMethod.POST)
 	public void clientLogout(@RequestBody ChatInfo chatinfo){
-	
+
 		CHANNEL_MAP.getCHANNEL_MAP().remove(chatinfo.getUserId());
 		LOGGER.info("---客户端下线["+chatinfo.getUserId()+"]");
 	}

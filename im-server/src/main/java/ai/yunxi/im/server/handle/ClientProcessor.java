@@ -15,10 +15,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年3月7日 下午10:38:47
- * 
+ *
  */
 @Component
 public class ClientProcessor {
@@ -27,13 +27,13 @@ public class ClientProcessor {
     private OkHttpClient okHttpClient;
     @Autowired
     private InitConfiguration conf;
-    
+
 	public void down(Integer userId){
 		try {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId",userId);
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
-			
+
 			Request request = new Request.Builder()
 			        .url(conf.getRouteLogoutUrl())
 			        .post(requestBody)

@@ -22,29 +22,29 @@ import ai.yunxi.im.route.service.RouteService;
 import ai.yunxi.im.route.zk.ZKUtil;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月27日 下午3:11:53
- * 
+ *
  */
 @RestController
 @RequestMapping("/")
 public class IMRouteController {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(IMRouteController.class);
 	private AtomicLong index = new AtomicLong();
-	
+
 	@Autowired
 	private ZKUtil zk;
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
 	@Autowired
 	private RouteService routeService;
-	
+
 	/**
 	 * 客户端登录，发现可用服务端:
 	 * 1、获取所有zk上的节点；
-	 * 2、轮询法得到一个节点 
+	 * 2、轮询法得到一个节点
 	 **/
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ServerInfo login(@RequestBody UserInfo userInfo){
@@ -59,7 +59,7 @@ public class IMRouteController {
 			if (position < 0) {
 			    position = 0L;
 			}
-			server = all.get(position.intValue());
+        			server = all.get(position.intValue());
 			redisTemplate.opsForValue().set(BasicConstant.ROUTE_PREFIX+userInfo.getUserId(), server);
 			LOGGER.info("get server info :"+server);
 		} catch (Exception e) {
@@ -69,7 +69,7 @@ public class IMRouteController {
 		ServerInfo serviceInfo = new ServerInfo(serv[0], Integer.parseInt(serv[1]), Integer.parseInt(serv[2]));
 		return serviceInfo;
 	}
-	
+
 	/**
 	 * 分发消息
 	 **/
@@ -99,7 +99,7 @@ public class IMRouteController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 客户端下线，从缓存中删除客户端与服务端映射关系
 	 **/

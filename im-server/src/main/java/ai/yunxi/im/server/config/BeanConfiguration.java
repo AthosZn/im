@@ -10,21 +10,21 @@ import org.springframework.context.annotation.Configuration;
 import okhttp3.OkHttpClient;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午5:48:27
- * 
+ *
  */
 @Configuration
 public class BeanConfiguration {
 	@Autowired
 	private InitConfiguration conf;
-	
+
 	@Bean
 	public ZkClient createZKClient(){
 		return new ZkClient(conf.getAddr());
 	}
-	
+
     /**
      * http client
      * @return okHttp

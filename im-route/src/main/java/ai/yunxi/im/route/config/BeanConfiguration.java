@@ -17,10 +17,10 @@ import ai.yunxi.im.route.zk.ZKUtil;
 import okhttp3.OkHttpClient;
 
 /**
- * 
- * @author 小五老师-云析学院
+ *
+ * @author Athos
  * @createTime 2019年2月26日 下午10:08:36
- * 
+ *
  */
 @Configuration
 public class BeanConfiguration {
@@ -28,14 +28,14 @@ public class BeanConfiguration {
 	private InitConfiguration conf;
 	@Autowired
 	private ZKUtil zkUtil;
-	
+
 	@Bean
 	public ZkClient createZKClient(){
 		ZkClient zk = new ZkClient(conf.getAddr());
-		
+
 		//监听/route节点下子节点的变化，实时更新server list
 		zk.subscribeChildChanges(conf.getRoot(), new IZkChildListener() {
-			
+
 			@Override
 			public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
 				zkUtil.setAllNode(currentChilds);
@@ -43,7 +43,7 @@ public class BeanConfiguration {
 		});
 		return zk;
 	}
-	
+
 	/**
      * Redis bean
      * @param factory
@@ -57,7 +57,7 @@ public class BeanConfiguration {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
-    
+
     /**
      * http client
      * @return okHttp
