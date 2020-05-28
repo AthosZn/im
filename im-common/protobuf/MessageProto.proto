@@ -11,5 +11,5 @@ message MessageProtocol {
   required int64 time = 2;
   required int32 userId = 3;
   required string content = 4;
-  
+
 }

@@ -11,6 +11,8 @@
     if(!window.WebSocket){
         window.WebSocket=window.MozWebSocket;
     }
+
+
     if(window.WebSocket){
         websocket=new WebSocket("ws://localhost:20000/web");
         websocket.onmessage=function (event) {

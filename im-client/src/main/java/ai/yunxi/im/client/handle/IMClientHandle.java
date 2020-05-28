@@ -21,7 +21,6 @@ public class IMClientHandle extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-
 		MessageProto.MessageProtocol message = (MessageProto.MessageProtocol) msg;
 		LOGGER.info("客户端接收到消息："+message.getContent());
 	}

@@ -1,5 +1,7 @@
 https://github.com/smallFive55/im
 
+https://gitee.com/zjz0812/heart-netty 
+
 # IM聊天室
 一个基于Netty的聊天工具（开发中），使用Zookeeper+Redis实现服务端分布式部署。
 
@@ -45,3 +47,6 @@ java -jar im-server\target\im-server-0.0.1-SNAPSHOT.jar --server.port=8085 --im.
 java -jar im-client\target\im-client-0.0.1-SNAPSHOT.jar --server.port=8071 --im.user.id=1001 --im.user.userName=Five
 java -jar im-client\target\im-client-0.0.1-SNAPSHOT.jar --server.port=8072 --im.user.id=1002 --im.user.userName=Luffy
 ```	
+
+
+protoc --js_out=import_style=commonjs,binary:. testmessage.proto

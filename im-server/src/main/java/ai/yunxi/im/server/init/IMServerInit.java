@@ -2,6 +2,7 @@ package ai.yunxi.im.server.init;
 
 import javax.annotation.PostConstruct;
 
+import ai.yunxi.im.server.handle.WebsocketServerHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
  * @createTime 2019年2月27日 下午1:35:52
  *
  */
-@Component
+//@Component
 public class IMServerInit {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMServerInit.class);
@@ -62,7 +63,10 @@ public class IMServerInit {
 					    pipeline.addLast(new ProtobufDecoder(MessageProto.MessageProtocol.getDefaultInstance()));
 					    pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
 					    pipeline.addLast(new ProtobufEncoder());
-
+//				在 channelRead() 方法里面，我们打印当前 handler 的信息，然后调用父类的
+//				channelRead() 方法，而这里父类的 channelRead() 方法会自动调用到下一个
+//				inBoundHandler 的 channelRead() 方法，并且会把当前 inBoundHandler
+//				里处理完毕的对象传递到下一个 inBoundHandler，我们例子中传递的对象都是同一个 msg。
 						pipeline.addLast(new IMServerHandle());
 					}
 				});

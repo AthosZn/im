@@ -44,6 +44,11 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 		}
 	}
 
+	/**
+	 * 异常
+	 * @param ctx
+	 * @throws Exception
+	 */
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		Integer uid = ctx.channel().attr(userId).get();
