@@ -117,7 +117,7 @@ BIO 主要存在以下缺点：
 3.1.1 EventLoopGroup, 在这里 new 了 2 个
 
 ```
-EventLoopGroup bossGroup = new NioEventLoopGroup();
+EventLoopGroup bossGroup = new NioEventLoopGroup();NettyRuntime.availableProcessors()
 EventLoopGroup workerGroup = new NioEventLoopGroup();
 ```
 

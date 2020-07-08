@@ -1,10 +1,12 @@
 package ai.yunxi.im.route.config;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.ZkClient;
+import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import ai.yunxi.im.route.zk.ZKUtil;
 import okhttp3.OkHttpClient;
+
+import javax.annotation.PostConstruct;
 
 /**
  *
@@ -28,20 +32,56 @@ public class BeanConfiguration {
 	private InitConfiguration conf;
 	@Autowired
 	private ZKUtil zkUtil;
+	@Autowired
+	private ZkClient zk;
 
 	@Bean
 	public ZkClient createZKClient(){
-		ZkClient zk = new ZkClient(conf.getAddr());
+		ZkClient zkClient = new ZkClient(conf.getAddr());
 
 		//监听/route节点下子节点的变化，实时更新server list
-		zk.subscribeChildChanges(conf.getRoot(), new IZkChildListener() {
-
+		zkClient.subscribeChildChanges(conf.getRoot(), new IZkChildListener() {
 			@Override
 			public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
 				zkUtil.setAllNode(currentChilds);
 			}
 		});
-		return zk;
+		//获取节点相关数据
+
+		return zkClient;
+	}
+
+	@PostConstruct
+	public void init(){
+
+		//监听/route节点下子节点的变化，实时更新server list
+		zk.subscribeChildChanges(conf.getRoot(), new IZkChildListener() {
+			@Override
+			public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
+				zkUtil.setAllNode(currentChilds);
+			}
+		});
+		//获取节点相关数据
+		watchNode(zk);
+	}
+
+
+	//监听服务端的列表信息
+	private void watchNode(ZkClient zooKeeper){
+		try{
+			if(zooKeeper.exists(conf.getRoot())) {
+				//获取子节点信息
+				List<String> nodeList = zooKeeper.getChildren(conf.getRoot());
+				List<String> dataList = new ArrayList<String>();
+				for (String node : nodeList) {
+//				byte[] bytes = zooKeeper.readData(conf.getRoot() + "/" + node);
+					dataList.add(conf.getRoot() + "/" + node);
+				}
+				zkUtil.setAllNode(dataList);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	/**

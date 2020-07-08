@@ -32,7 +32,7 @@ import javax.annotation.PostConstruct;
  * @createTime 2019年2月27日 下午1:35:52
  *
  */
-@Component
+//@Component
 public class IMWebSocketServerInit {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMWebSocketServerInit.class);

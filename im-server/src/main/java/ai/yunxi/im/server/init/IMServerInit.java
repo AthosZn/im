@@ -3,6 +3,7 @@ package ai.yunxi.im.server.init;
 import javax.annotation.PostConstruct;
 
 import ai.yunxi.im.server.handle.WebsocketServerHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
  * @createTime 2019年2月27日 下午1:35:52
  *
  */
-//@Component
+@Component
 public class IMServerInit {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMServerInit.class);
@@ -58,6 +59,7 @@ public class IMServerInit {
 					@Override
 					protected void initChannel(SocketChannel ch) throws Exception {
 						ChannelPipeline pipeline = ch.pipeline();
+						pipeline.addLast(new IdleStateHandler(60, 0, 0));
 						// google Protobuf 编解码
 						pipeline.addLast(new ProtobufVarint32FrameDecoder());
 					    pipeline.addLast(new ProtobufDecoder(MessageProto.MessageProtocol.getDefaultInstance()));

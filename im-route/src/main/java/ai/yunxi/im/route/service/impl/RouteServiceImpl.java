@@ -25,6 +25,7 @@ import okhttp3.Response;
 public class RouteServiceImpl implements RouteService {
 
 	private MediaType mediaType = MediaType.parse("application/json");
+
     @Autowired
     private OkHttpClient okHttpClient;
 

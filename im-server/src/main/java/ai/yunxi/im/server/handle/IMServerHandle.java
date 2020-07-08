@@ -1,5 +1,9 @@
 package ai.yunxi.im.server.handle;
 
+import ai.yunxi.im.server.kit.HeartBeatHandler;
+import ai.yunxi.im.server.kit.ServerHeartBeatHandlerImpl;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,5 +61,27 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 		clientProcessor.down(uid);
 
 		LOGGER.info("----客户端强制下线。userId:"+uid);
+	}
+
+	/**
+	 * https://blog.csdn.net/lalalahaitang/article/details/81512844  ReaderIdleTimeoutTask run会
+	 * 调用channelIdle方法。该方法会把时间下传到下一个handler的userEventTriggered方法。
+	 * @param ctx
+	 * @param evt
+	 * @throws Exception
+	 */
+	@Override
+	public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+		if (evt instanceof IdleStateEvent) {
+			IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
+			if (idleStateEvent.state() == IdleState.READER_IDLE) {
+
+				LOGGER.info("定时检测客户端端是否存活");
+
+				HeartBeatHandler heartBeatHandler = SpringBeanFactory.getBean(ServerHeartBeatHandlerImpl.class) ;
+				heartBeatHandler.process(ctx) ;
+			}
+		}
+		super.userEventTriggered(ctx, evt);
 	}
 }

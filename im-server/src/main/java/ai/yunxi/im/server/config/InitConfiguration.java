@@ -25,6 +25,10 @@ public class InitConfiguration {
 
 	@Value("${im.route.logout.url}")
     private String routeLogoutUrl;
+
+	@Value("${im.heartbeat.time}")
+	private int heartbeatTime;
+
 	public int getHttpPort() {
 		return httpPort;
 	}
@@ -60,5 +64,13 @@ public class InitConfiguration {
 	}
 	public void setRouteLogoutUrl(String routeLogoutUrl) {
 		this.routeLogoutUrl = routeLogoutUrl;
+	}
+
+	public int getHeartbeatTime() {
+		return heartbeatTime;
+	}
+
+	public void setHeartbeatTime(int heartbeatTime) {
+		this.heartbeatTime = heartbeatTime;
 	}
 }
