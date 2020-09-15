@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import ai.yunxi.im.client.handle.ClientIdleStateTrigger;
+import ai.yunxi.im.client.handle.Pinger;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,12 +136,17 @@ public class IMClientInit {
 						protected void initChannel(SocketChannel ch) throws Exception {
 							ChannelPipeline pipeline = ch.pipeline();
 							// google Protobuf 编解码
+							pipeline.addLast("idleStateHandler", new IdleStateHandler(0, 30, 0));
+							pipeline.addLast("idleStateTrigger", new ClientIdleStateTrigger());
 							pipeline.addLast(new ProtobufVarint32FrameDecoder());
 						    pipeline.addLast(new ProtobufDecoder(MessageProto.MessageProtocol.getDefaultInstance()));
 						    pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
 						    pipeline.addLast(new ProtobufEncoder());
 
 							pipeline.addLast(new IMClientHandle());
+							pipeline.addLast(new Pinger());
+							pipeline.addLast(new ClientIdleStateTrigger());
+
 						}
 					});
 

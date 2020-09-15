@@ -2,10 +2,7 @@ package ai.yunxi.im.server.kit;
 
 import ai.yunxi.im.common.constant.BasicConstant;
 import ai.yunxi.im.server.config.InitConfiguration;
-
-import com.sun.org.apache.xml.internal.security.Init;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * Function:
+ * Function: 处理心跳下线逻辑
  *
  * @author crossoverJie
  * Date: 2019-01-20 17:16

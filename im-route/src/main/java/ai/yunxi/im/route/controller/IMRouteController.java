@@ -70,35 +70,35 @@ public class IMRouteController {
 		return serviceInfo;
 	}
 
-	/**
-	 * 分发消息
-	 **/
-	@RequestMapping(value="/chat", method=RequestMethod.POST)
-	public void chat(@RequestBody ChatInfo chat){
-		//判断userId是否登录——从缓存取数据 ...
-		String islogin = redisTemplate.opsForValue().get(BasicConstant.ROUTE_PREFIX + chat.getUserId());
-		if(StringUtil.isEmpty(islogin)){
-			LOGGER.info("该用户并未登录["+chat.getUserId()+"]");
-			return;
-		}
-		try {
-			//从ZK拿到所有节点，分发消息
-			List<String> all = zk.getAllNode();
-			for (String server : all) {
-				String[] serv = server.split("-");
-				String ip = serv[0];
-				int httpPort = Integer.parseInt(serv[2]);
-				String url = "http://"+ip+":"+httpPort+"/pushMessage";
-				routeService.sendMessage(url, chat);
-			}
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * 分发消息
+//	 **/
+//	@RequestMapping(value="/chat", method=RequestMethod.POST)
+//	public void chat(@RequestBody ChatInfo chat){
+//		//判断userId是否登录——从缓存取数据 ...
+//		String islogin = redisTemplate.opsForValue().get(BasicConstant.ROUTE_PREFIX + chat.getUserId());
+//		if(StringUtil.isEmpty(islogin)){
+//			LOGGER.info("该用户并未登录["+chat.getUserId()+"]");
+//			return;
+//		}
+//		try {
+//			//从ZK拿到所有节点，分发消息
+//			List<String> all = zk.getAllNode();
+//			for (String server : all) {
+//				String[] serv = server.split("-");
+//				String ip = serv[0];
+//				int httpPort = Integer.parseInt(serv[2]);
+//				String url = "http://"+ip+":"+httpPort+"/pushMessage";
+//				routeService.sendMessage(url, chat);
+//			}
+//		} catch (NumberFormatException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * 客户端下线，从缓存中删除客户端与服务端映射关系

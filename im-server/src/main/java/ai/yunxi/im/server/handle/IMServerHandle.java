@@ -28,6 +28,8 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 
 	private ChannelMap CHANNEL_MAP = ChannelMap.newInstance();
 
+	private final AttributeKey<Integer> userIdKey = AttributeKey.valueOf("userId");
+
 	private ClientProcessor clientProcessor;
 
 
@@ -45,7 +47,16 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 			ctx.channel().attr(userId).set(message.getUserId());
 			CHANNEL_MAP.putClient(message.getUserId(), ctx.channel());
 			LOGGER.info("---客户端登录成功。userId:"+message.getUserId());
+		}else if(MessageConstant.PING.equals(message.getCommand())){
+			int userId= ctx.channel().attr(userIdKey).get();
+			MessageProto.MessageProtocol heartBeat = MessageProto.MessageProtocol.newBuilder()
+					.setCommand(MessageConstant.PONG)
+					.setTime(System.currentTimeMillis())
+					.setContent(MessageConstant.PONG)
+					.setUserId(userId).build();
+			ctx.channel().writeAndFlush(heartBeat);
 		}
+
 	}
 
 	/**
@@ -66,6 +77,9 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 	/**
 	 * https://blog.csdn.net/lalalahaitang/article/details/81512844  ReaderIdleTimeoutTask run会
 	 * 调用channelIdle方法。该方法会把时间下传到下一个handler的userEventTriggered方法。
+	 *
+	 *  超时 会将IdleStateHandler 添加到 ChannelPipeline 中
+	 *  超时会触发用户的 userEventTriggered 方法：
 	 * @param ctx
 	 * @param evt
 	 * @throws Exception
