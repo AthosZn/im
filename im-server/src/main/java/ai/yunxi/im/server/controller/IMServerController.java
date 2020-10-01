@@ -2,6 +2,7 @@ package ai.yunxi.im.server.controller;
 
 import java.util.Map.Entry;
 
+import ai.yunxi.im.common.pojo.ImMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ai.yunxi.im.common.constant.MessageConstant;
-import ai.yunxi.im.common.pojo.ChatInfo;
+import ai.yunxi.im.common.pojo.ImMessage;
 import ai.yunxi.im.common.protocol.MessageProto;
 import ai.yunxi.im.server.handle.ChannelMap;
 import io.netty.channel.Channel;
@@ -34,7 +35,7 @@ public class IMServerController {
 	 * 服务端接收消息，并推送到指定客户端
 	 **/
 	@RequestMapping(value="/pushMessage", method=RequestMethod.POST)
-	public void pushMessage(@RequestBody ChatInfo chat){
+	public void pushMessage(@RequestBody ImMessage chat){
 		//1.接收客户端封装好的消息对象
 		MessageProto.MessageProtocol message = MessageProto.MessageProtocol.newBuilder()
 				.setCommand(chat.getCommand())
@@ -58,9 +59,9 @@ public class IMServerController {
 	 * 服务端处理客户端下线事件
 	 **/
 	@RequestMapping(value="/clientLogout", method=RequestMethod.POST)
-	public void clientLogout(@RequestBody ChatInfo chatinfo){
+	public void clientLogout(@RequestBody ImMessage ImMessage){
 
-		CHANNEL_MAP.getCHANNEL_MAP().remove(chatinfo.getUserId());
-		LOGGER.info("---客户端下线["+chatinfo.getUserId()+"]");
+		CHANNEL_MAP.getCHANNEL_MAP().remove(ImMessage.getUserId());
+		LOGGER.info("---客户端下线["+ImMessage.getUserId()+"]");
 	}
 }

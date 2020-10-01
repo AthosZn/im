@@ -3,53 +3,39 @@ package ai.yunxi.im.common.pojo;
 import java.io.Serializable;
 
 /**
- *
- * @author Athos
- * @createTime 2019年3月7日 下午5:27:21
- *
+ * @author zz
+ * 2020/6/10
  */
 public class ChatInfo implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1360647504610967672L;
-	private String command;
-	private Long time;
-	private Integer userId;
-	private String content;
+    private static final long serialVersionUID = -8953937130022071877L;
 
-	public ChatInfo(String command, Long time, Integer userId, String content) {
-		this.command = command;
-		this.time = time;
-		this.userId = userId;
-		this.content = content;
-	}
-	public ChatInfo() {
-	}
-	public String getCommand() {
-		return command;
-	}
-	public void setCommand(String command) {
-		this.command = command;
-	}
-	public Long getTime() {
-		return time;
-	}
-	public void setTime(Long time) {
-		this.time = time;
-	}
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+    //聊天内容
+    private String content;
+
+    //消息发送者
+    private long fromUid;
+
+    //消息发送者头像
+    private String fromAvatar;
+
+    //消息发送者昵称
+    private String fromNickName;
+
+    //消息接收者
+    private long toId;
+
+    //消息类型
+    private int command;
+
+    //是否原图
+    private int isOrigin;
+
+    //当前时间
+    private long currentTime;
+
+    //是否发送apns
+    private boolean sendApns = true;
+
 
 }

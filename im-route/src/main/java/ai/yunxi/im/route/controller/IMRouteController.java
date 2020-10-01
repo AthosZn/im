@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ai.yunxi.im.common.constant.BasicConstant;
-import ai.yunxi.im.common.pojo.ChatInfo;
+import ai.yunxi.im.common.pojo.ImMessage;
 import ai.yunxi.im.common.pojo.ServerInfo;
 import ai.yunxi.im.common.pojo.UserInfo;
 import ai.yunxi.im.common.utils.StringUtil;
@@ -60,7 +60,7 @@ public class IMRouteController {
 			    position = 0L;
 			}
         			server = all.get(position.intValue());
-			redisTemplate.opsForValue().set(BasicConstant.ROUTE_PREFIX+userInfo.getUserId(), server);
+			redisTemplate.opsForValue().set(BasicConstant.ROUTE_PREFIX+userInfo.getId(), server);
 			LOGGER.info("get server info :"+server);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +74,7 @@ public class IMRouteController {
 //	 * 分发消息
 //	 **/
 //	@RequestMapping(value="/chat", method=RequestMethod.POST)
-//	public void chat(@RequestBody ChatInfo chat){
+//	public void chat(@RequestBody ImMessage chat){
 //		//判断userId是否登录——从缓存取数据 ...
 //		String islogin = redisTemplate.opsForValue().get(BasicConstant.ROUTE_PREFIX + chat.getUserId());
 //		if(StringUtil.isEmpty(islogin)){
@@ -105,7 +105,7 @@ public class IMRouteController {
 	 **/
 	@RequestMapping(value="/logout", method=RequestMethod.POST)
 	public void logout(@RequestBody UserInfo userInfo){
-		redisTemplate.opsForValue().getOperations().delete(BasicConstant.ROUTE_PREFIX+userInfo.getUserId());
-		LOGGER.info("路由端处理了用户下线逻辑："+userInfo.getUserId());
+		redisTemplate.opsForValue().getOperations().delete(BasicConstant.ROUTE_PREFIX+userInfo.getId());
+		LOGGER.info("路由端处理了用户下线逻辑："+userInfo.getId());
 	}
 }

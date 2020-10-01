@@ -6,79 +6,100 @@ package ai.yunxi.im.common.protocol;
 public final class MessageProto {
   private MessageProto() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
+          com.google.protobuf.ExtensionRegistryLite registry) {
   }
 
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
+          com.google.protobuf.ExtensionRegistry registry) {
     registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
+            (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface MessageProtocolOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.MessageProtocol)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:protocol.MessageProtocol)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string command = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The id.
      */
-    boolean hasCommand();
+    java.lang.String getId();
     /**
-     * <code>required string command = 1;</code>
-     */
-    java.lang.String getCommand();
-    /**
-     * <code>required string command = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
     com.google.protobuf.ByteString
-        getCommandBytes();
+    getIdBytes();
 
     /**
-     * <code>required int64 time = 2;</code>
+     * <pre>
+     * 消息数组
+     * </pre>
+     *
+     * <code>string content = 2;</code>
+     * @return The content.
      */
-    boolean hasTime();
+    java.lang.String getContent();
     /**
-     * <code>required int64 time = 2;</code>
+     * <pre>
+     * 消息数组
+     * </pre>
+     *
+     * <code>string content = 2;</code>
+     * @return The bytes for content.
+     */
+    com.google.protobuf.ByteString
+    getContentBytes();
+
+    /**
+     * <pre>
+     * timestmap
+     * </pre>
+     *
+     * <code>int64 time = 3;</code>
+     * @return The time.
      */
     long getTime();
 
     /**
-     * <code>required int32 userId = 3;</code>
+     * <code>bool ack = 4;</code>
+     * @return The ack.
      */
-    boolean hasUserId();
-    /**
-     * <code>required int32 userId = 3;</code>
-     */
-    int getUserId();
+    boolean getAck();
 
     /**
-     * <code>required string content = 4;</code>
+     * <code>int32 command = 5;</code>
+     * @return The command.
      */
-    boolean hasContent();
+    int getCommand();
+
     /**
-     * <code>required string content = 4;</code>
+     * <code>int32 userId = 6;</code>
+     * @return The userId.
      */
-    java.lang.String getContent();
-    /**
-     * <code>required string content = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getContentBytes();
+    int getUserId();
   }
   /**
    * Protobuf type {@code protocol.MessageProtocol}
    */
   public  static final class MessageProtocol extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.MessageProtocol)
-      MessageProtocolOrBuilder {
-  private static final long serialVersionUID = 0L;
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:protocol.MessageProtocol)
+          MessageProtocolOrBuilder {
+    private static final long serialVersionUID = 0L;
     // Use MessageProtocol.newBuilder() to construct.
     private MessageProtocol(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private MessageProtocol() {
-      command_ = "";
+      id_ = "";
       content_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+            UnusedPrivateParameter unused) {
+      return new MessageProtocol();
     }
 
     @java.lang.Override
@@ -87,15 +108,15 @@ public final class MessageProto {
       return this.unknownFields;
     }
     private MessageProtocol(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -105,30 +126,40 @@ public final class MessageProto {
               done = true;
               break;
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              command_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              id_ = s;
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              time_ = input.readInt64();
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              content_ = s;
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
-              userId_ = input.readInt32();
+
+              time_ = input.readInt64();
               break;
             }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              content_ = bs;
+            case 32: {
+
+              ack_ = input.readBool();
+              break;
+            }
+            case 40: {
+
+              command_ = input.readInt32();
+              break;
+            }
+            case 48: {
+
+              userId_ = input.readInt32();
               break;
             }
             default: {
               if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
+                      input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -139,138 +170,147 @@ public final class MessageProto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return ai.yunxi.im.common.protocol.MessageProto.internal_static_protocol_MessageProtocol_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return ai.yunxi.im.common.protocol.MessageProto.internal_static_protocol_MessageProtocol_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.class, ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.class, ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int COMMAND_FIELD_NUMBER = 1;
-    private volatile java.lang.Object command_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object id_;
     /**
-     * <code>required string command = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The id.
      */
-    public boolean hasCommand() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>required string command = 1;</code>
-     */
-    public java.lang.String getCommand() {
-      java.lang.Object ref = command_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          command_ = s;
-        }
+        id_ = s;
         return s;
       }
     }
     /**
-     * <code>required string command = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getCommandBytes() {
-      java.lang.Object ref = command_;
+    getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        command_ = b;
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int TIME_FIELD_NUMBER = 2;
-    private long time_;
-    /**
-     * <code>required int64 time = 2;</code>
-     */
-    public boolean hasTime() {
-      return ((bitField0_ & 0x00000002) != 0);
-    }
-    /**
-     * <code>required int64 time = 2;</code>
-     */
-    public long getTime() {
-      return time_;
-    }
-
-    public static final int USERID_FIELD_NUMBER = 3;
-    private int userId_;
-    /**
-     * <code>required int32 userId = 3;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000004) != 0);
-    }
-    /**
-     * <code>required int32 userId = 3;</code>
-     */
-    public int getUserId() {
-      return userId_;
-    }
-
-    public static final int CONTENT_FIELD_NUMBER = 4;
+    public static final int CONTENT_FIELD_NUMBER = 2;
     private volatile java.lang.Object content_;
     /**
-     * <code>required string content = 4;</code>
-     */
-    public boolean hasContent() {
-      return ((bitField0_ & 0x00000008) != 0);
-    }
-    /**
-     * <code>required string content = 4;</code>
+     * <pre>
+     * 消息数组
+     * </pre>
+     *
+     * <code>string content = 2;</code>
+     * @return The content.
      */
     public java.lang.String getContent() {
       java.lang.Object ref = content_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          content_ = s;
-        }
+        content_ = s;
         return s;
       }
     }
     /**
-     * <code>required string content = 4;</code>
+     * <pre>
+     * 消息数组
+     * </pre>
+     *
+     * <code>string content = 2;</code>
+     * @return The bytes for content.
      */
     public com.google.protobuf.ByteString
-        getContentBytes() {
+    getContentBytes() {
       java.lang.Object ref = content_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         content_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+
+    public static final int TIME_FIELD_NUMBER = 3;
+    private long time_;
+    /**
+     * <pre>
+     * timestmap
+     * </pre>
+     *
+     * <code>int64 time = 3;</code>
+     * @return The time.
+     */
+    public long getTime() {
+      return time_;
+    }
+
+    public static final int ACK_FIELD_NUMBER = 4;
+    private boolean ack_;
+    /**
+     * <code>bool ack = 4;</code>
+     * @return The ack.
+     */
+    public boolean getAck() {
+      return ack_;
+    }
+
+    public static final int COMMAND_FIELD_NUMBER = 5;
+    private int command_;
+    /**
+     * <code>int32 command = 5;</code>
+     * @return The command.
+     */
+    public int getCommand() {
+      return command_;
+    }
+
+    public static final int USERID_FIELD_NUMBER = 6;
+    private int userId_;
+    /**
+     * <code>int32 userId = 6;</code>
+     * @return The userId.
+     */
+    public int getUserId() {
+      return userId_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -280,40 +320,30 @@ public final class MessageProto {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasCommand()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasTime()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasContent()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) != 0)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, command_);
+            throws java.io.IOException {
+      if (!getIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
       }
-      if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeInt64(2, time_);
+      if (!getContentBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, content_);
       }
-      if (((bitField0_ & 0x00000004) != 0)) {
-        output.writeInt32(3, userId_);
+      if (time_ != 0L) {
+        output.writeInt64(3, time_);
       }
-      if (((bitField0_ & 0x00000008) != 0)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, content_);
+      if (ack_ != false) {
+        output.writeBool(4, ack_);
+      }
+      if (command_ != 0) {
+        output.writeInt32(5, command_);
+      }
+      if (userId_ != 0) {
+        output.writeInt32(6, userId_);
       }
       unknownFields.writeTo(output);
     }
@@ -324,19 +354,27 @@ public final class MessageProto {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, command_);
+      if (!getIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
       }
-      if (((bitField0_ & 0x00000002) != 0)) {
+      if (!getContentBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, content_);
+      }
+      if (time_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, time_);
+                .computeInt64Size(3, time_);
       }
-      if (((bitField0_ & 0x00000004) != 0)) {
+      if (ack_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, userId_);
+                .computeBoolSize(4, ack_);
       }
-      if (((bitField0_ & 0x00000008) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, content_);
+      if (command_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(5, command_);
+      }
+      if (userId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt32Size(6, userId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -346,33 +384,25 @@ public final class MessageProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof ai.yunxi.im.common.protocol.MessageProto.MessageProtocol)) {
         return super.equals(obj);
       }
       ai.yunxi.im.common.protocol.MessageProto.MessageProtocol other = (ai.yunxi.im.common.protocol.MessageProto.MessageProtocol) obj;
 
-      if (hasCommand() != other.hasCommand()) return false;
-      if (hasCommand()) {
-        if (!getCommand()
-            .equals(other.getCommand())) return false;
-      }
-      if (hasTime() != other.hasTime()) return false;
-      if (hasTime()) {
-        if (getTime()
-            != other.getTime()) return false;
-      }
-      if (hasUserId() != other.hasUserId()) return false;
-      if (hasUserId()) {
-        if (getUserId()
-            != other.getUserId()) return false;
-      }
-      if (hasContent() != other.hasContent()) return false;
-      if (hasContent()) {
-        if (!getContent()
-            .equals(other.getContent())) return false;
-      }
+      if (!getId()
+              .equals(other.getId())) return false;
+      if (!getContent()
+              .equals(other.getContent())) return false;
+      if (getTime()
+              != other.getTime()) return false;
+      if (getAck()
+              != other.getAck()) return false;
+      if (getCommand()
+              != other.getCommand()) return false;
+      if (getUserId()
+              != other.getUserId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -384,95 +414,93 @@ public final class MessageProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasCommand()) {
-        hash = (37 * hash) + COMMAND_FIELD_NUMBER;
-        hash = (53 * hash) + getCommand().hashCode();
-      }
-      if (hasTime()) {
-        hash = (37 * hash) + TIME_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getTime());
-      }
-      if (hasUserId()) {
-        hash = (37 * hash) + USERID_FIELD_NUMBER;
-        hash = (53 * hash) + getUserId();
-      }
-      if (hasContent()) {
-        hash = (37 * hash) + CONTENT_FIELD_NUMBER;
-        hash = (53 * hash) + getContent().hashCode();
-      }
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId().hashCode();
+      hash = (37 * hash) + CONTENT_FIELD_NUMBER;
+      hash = (53 * hash) + getContent().hashCode();
+      hash = (37 * hash) + TIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+              getTime());
+      hash = (37 * hash) + ACK_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+              getAck());
+      hash = (37 * hash) + COMMAND_FIELD_NUMBER;
+      hash = (53 * hash) + getCommand();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId();
       hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
       return hash;
     }
 
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     @java.lang.Override
@@ -486,12 +514,12 @@ public final class MessageProto {
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -499,20 +527,20 @@ public final class MessageProto {
      * Protobuf type {@code protocol.MessageProtocol}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.MessageProtocol)
-        ai.yunxi.im.common.protocol.MessageProto.MessageProtocolOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:protocol.MessageProtocol)
+            ai.yunxi.im.common.protocol.MessageProto.MessageProtocolOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return ai.yunxi.im.common.protocol.MessageProto.internal_static_protocol_MessageProtocol_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return ai.yunxi.im.common.protocol.MessageProto.internal_static_protocol_MessageProtocol_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.class, ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.class, ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.Builder.class);
       }
 
       // Construct using ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.newBuilder()
@@ -521,7 +549,7 @@ public final class MessageProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -533,20 +561,24 @@ public final class MessageProto {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        command_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        time_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        id_ = "";
+
         content_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
+
+        time_ = 0L;
+
+        ack_ = false;
+
+        command_ = 0;
+
+        userId_ = 0;
+
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return ai.yunxi.im.common.protocol.MessageProto.internal_static_protocol_MessageProtocol_descriptor;
       }
 
@@ -567,25 +599,12 @@ public final class MessageProto {
       @java.lang.Override
       public ai.yunxi.im.common.protocol.MessageProto.MessageProtocol buildPartial() {
         ai.yunxi.im.common.protocol.MessageProto.MessageProtocol result = new ai.yunxi.im.common.protocol.MessageProto.MessageProtocol(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.command_ = command_;
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.time_ = time_;
-          to_bitField0_ |= 0x00000002;
-        }
-        if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.userId_ = userId_;
-          to_bitField0_ |= 0x00000004;
-        }
-        if (((from_bitField0_ & 0x00000008) != 0)) {
-          to_bitField0_ |= 0x00000008;
-        }
+        result.id_ = id_;
         result.content_ = content_;
-        result.bitField0_ = to_bitField0_;
+        result.time_ = time_;
+        result.ack_ = ack_;
+        result.command_ = command_;
+        result.userId_ = userId_;
         onBuilt();
         return result;
       }
@@ -596,30 +615,30 @@ public final class MessageProto {
       }
       @java.lang.Override
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
         return super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
       @java.lang.Override
@@ -634,21 +653,25 @@ public final class MessageProto {
 
       public Builder mergeFrom(ai.yunxi.im.common.protocol.MessageProto.MessageProtocol other) {
         if (other == ai.yunxi.im.common.protocol.MessageProto.MessageProtocol.getDefaultInstance()) return this;
-        if (other.hasCommand()) {
-          bitField0_ |= 0x00000001;
-          command_ = other.command_;
+        if (!other.getId().isEmpty()) {
+          id_ = other.id_;
           onChanged();
         }
-        if (other.hasTime()) {
-          setTime(other.getTime());
-        }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasContent()) {
-          bitField0_ |= 0x00000008;
+        if (!other.getContent().isEmpty()) {
           content_ = other.content_;
           onChanged();
+        }
+        if (other.getTime() != 0L) {
+          setTime(other.getTime());
+        }
+        if (other.getAck() != false) {
+          setAck(other.getAck());
+        }
+        if (other.getCommand() != 0) {
+          setCommand(other.getCommand());
+        }
+        if (other.getUserId() != 0) {
+          setUserId(other.getUserId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -657,26 +680,14 @@ public final class MessageProto {
 
       @java.lang.Override
       public final boolean isInitialized() {
-        if (!hasCommand()) {
-          return false;
-        }
-        if (!hasTime()) {
-          return false;
-        }
-        if (!hasUserId()) {
-          return false;
-        }
-        if (!hasContent()) {
-          return false;
-        }
         return true;
       }
 
       @java.lang.Override
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         ai.yunxi.im.common.protocol.MessageProto.MessageProtocol parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -690,182 +701,119 @@ public final class MessageProto {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object command_ = "";
+      private java.lang.Object id_ = "";
       /**
-       * <code>required string command = 1;</code>
+       * <code>string id = 1;</code>
+       * @return The id.
        */
-      public boolean hasCommand() {
-        return ((bitField0_ & 0x00000001) != 0);
-      }
-      /**
-       * <code>required string command = 1;</code>
-       */
-      public java.lang.String getCommand() {
-        java.lang.Object ref = command_;
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            command_ = s;
-          }
+          id_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>required string command = 1;</code>
+       * <code>string id = 1;</code>
+       * @return The bytes for id.
        */
       public com.google.protobuf.ByteString
-          getCommandBytes() {
-        java.lang.Object ref = command_;
+      getIdBytes() {
+        java.lang.Object ref = id_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          command_ = b;
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          id_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>required string command = 1;</code>
+       * <code>string id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
        */
-      public Builder setCommand(
-          java.lang.String value) {
+      public Builder setId(
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        command_ = value;
+          throw new NullPointerException();
+        }
+
+        id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string command = 1;</code>
+       * <code>string id = 1;</code>
+       * @return This builder for chaining.
        */
-      public Builder clearCommand() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        command_ = getDefaultInstance().getCommand();
+      public Builder clearId() {
+
+        id_ = getDefaultInstance().getId();
         onChanged();
         return this;
       }
       /**
-       * <code>required string command = 1;</code>
+       * <code>string id = 1;</code>
+       * @param value The bytes for id to set.
+       * @return This builder for chaining.
        */
-      public Builder setCommandBytes(
-          com.google.protobuf.ByteString value) {
+      public Builder setIdBytes(
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        command_ = value;
-        onChanged();
-        return this;
-      }
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
 
-      private long time_ ;
-      /**
-       * <code>required int64 time = 2;</code>
-       */
-      public boolean hasTime() {
-        return ((bitField0_ & 0x00000002) != 0);
-      }
-      /**
-       * <code>required int64 time = 2;</code>
-       */
-      public long getTime() {
-        return time_;
-      }
-      /**
-       * <code>required int64 time = 2;</code>
-       */
-      public Builder setTime(long value) {
-        bitField0_ |= 0x00000002;
-        time_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 time = 2;</code>
-       */
-      public Builder clearTime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        time_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private int userId_ ;
-      /**
-       * <code>required int32 userId = 3;</code>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000004) != 0);
-      }
-      /**
-       * <code>required int32 userId = 3;</code>
-       */
-      public int getUserId() {
-        return userId_;
-      }
-      /**
-       * <code>required int32 userId = 3;</code>
-       */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000004;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 userId = 3;</code>
-       */
-      public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        userId_ = 0;
+        id_ = value;
         onChanged();
         return this;
       }
 
       private java.lang.Object content_ = "";
       /**
-       * <code>required string content = 4;</code>
-       */
-      public boolean hasContent() {
-        return ((bitField0_ & 0x00000008) != 0);
-      }
-      /**
-       * <code>required string content = 4;</code>
+       * <pre>
+       * 消息数组
+       * </pre>
+       *
+       * <code>string content = 2;</code>
+       * @return The content.
        */
       public java.lang.String getContent() {
         java.lang.Object ref = content_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            content_ = s;
-          }
+          content_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>required string content = 4;</code>
+       * <pre>
+       * 消息数组
+       * </pre>
+       *
+       * <code>string content = 2;</code>
+       * @return The bytes for content.
        */
       public com.google.protobuf.ByteString
-          getContentBytes() {
+      getContentBytes() {
         java.lang.Object ref = content_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           content_ = b;
           return b;
         } else {
@@ -873,49 +821,199 @@ public final class MessageProto {
         }
       }
       /**
-       * <code>required string content = 4;</code>
+       * <pre>
+       * 消息数组
+       * </pre>
+       *
+       * <code>string content = 2;</code>
+       * @param value The content to set.
+       * @return This builder for chaining.
        */
       public Builder setContent(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+
         content_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string content = 4;</code>
+       * <pre>
+       * 消息数组
+       * </pre>
+       *
+       * <code>string content = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearContent() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+
         content_ = getDefaultInstance().getContent();
         onChanged();
         return this;
       }
       /**
-       * <code>required string content = 4;</code>
+       * <pre>
+       * 消息数组
+       * </pre>
+       *
+       * <code>string content = 2;</code>
+       * @param value The bytes for content to set.
+       * @return This builder for chaining.
        */
       public Builder setContentBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         content_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long time_ ;
+      /**
+       * <pre>
+       * timestmap
+       * </pre>
+       *
+       * <code>int64 time = 3;</code>
+       * @return The time.
+       */
+      public long getTime() {
+        return time_;
+      }
+      /**
+       * <pre>
+       * timestmap
+       * </pre>
+       *
+       * <code>int64 time = 3;</code>
+       * @param value The time to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTime(long value) {
+
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * timestmap
+       * </pre>
+       *
+       * <code>int64 time = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTime() {
+
+        time_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean ack_ ;
+      /**
+       * <code>bool ack = 4;</code>
+       * @return The ack.
+       */
+      public boolean getAck() {
+        return ack_;
+      }
+      /**
+       * <code>bool ack = 4;</code>
+       * @param value The ack to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAck(boolean value) {
+
+        ack_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool ack = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAck() {
+
+        ack_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int command_ ;
+      /**
+       * <code>int32 command = 5;</code>
+       * @return The command.
+       */
+      public int getCommand() {
+        return command_;
+      }
+      /**
+       * <code>int32 command = 5;</code>
+       * @param value The command to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCommand(int value) {
+
+        command_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 command = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCommand() {
+
+        command_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int userId_ ;
+      /**
+       * <code>int32 userId = 6;</code>
+       * @return The userId.
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>int32 userId = 6;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(int value) {
+
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 userId = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+
+        userId_ = 0;
         onChanged();
         return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       @java.lang.Override
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -933,13 +1031,13 @@ public final class MessageProto {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<MessageProtocol>
-        PARSER = new com.google.protobuf.AbstractParser<MessageProtocol>() {
+    private static final com.google.protobuf.Parser<MessageProtocol>
+            PARSER = new com.google.protobuf.AbstractParser<MessageProtocol>() {
       @java.lang.Override
       public MessageProtocol parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
         return new MessageProtocol(input, extensionRegistry);
       }
     };
@@ -961,42 +1059,35 @@ public final class MessageProto {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_MessageProtocol_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_MessageProtocol_fieldAccessorTable;
+          internal_static_protocol_MessageProtocol_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_protocol_MessageProtocol_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+          descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MessageProto.proto\022\010protocol\"Q\n\017Messag" +
-      "eProtocol\022\017\n\007command\030\001 \002(\t\022\014\n\004time\030\002 \002(\003" +
-      "\022\016\n\006userId\030\003 \002(\005\022\017\n\007content\030\004 \002(\tB+\n\033ai." +
-      "yunxi.im.common.protocolB\014MessageProto"
+            "\n\022MessageProto.proto\022\010protocol\"j\n\017Messag" +
+                    "eProtocol\022\n\n\002id\030\001 \001(\t\022\017\n\007content\030\002 \001(\t\022\014" +
+                    "\n\004time\030\003 \001(\003\022\013\n\003ack\030\004 \001(\010\022\017\n\007command\030\005 \001" +
+                    "(\005\022\016\n\006userId\030\006 \001(\005B+\n\033ai.yunxi.im.common" +
+                    ".protocolB\014MessageProtob\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
+            .internalBuildGeneratedFileFrom(descriptorData,
+                    new com.google.protobuf.Descriptors.FileDescriptor[] {
+                    });
     internal_static_protocol_MessageProtocol_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+            getDescriptor().getMessageTypes().get(0);
     internal_static_protocol_MessageProtocol_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_MessageProtocol_descriptor,
-        new java.lang.String[] { "Command", "Time", "UserId", "Content", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_protocol_MessageProtocol_descriptor,
+            new java.lang.String[] { "Id", "Content", "Time", "Ack", "Command", "UserId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

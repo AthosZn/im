@@ -1,7 +1,7 @@
 package ai.yunxi.im.route.controller;
 
 import ai.yunxi.im.common.constant.BasicConstant;
-import ai.yunxi.im.common.pojo.ChatInfo;
+import ai.yunxi.im.common.pojo.ImMessage;
 import ai.yunxi.im.common.pojo.ServerInfo;
 import ai.yunxi.im.common.pojo.UserInfo;
 import ai.yunxi.im.common.utils.StringUtil;
@@ -44,7 +44,7 @@ public class ChatRouteController {
 	 * 分发消息
 	 **/
 	@RequestMapping(value="/send", method=RequestMethod.POST)
-	public void chat(@RequestBody ChatInfo chat){
+	public void chat(@RequestBody ImMessage chat){
 		//判断userId是否登录——从缓存取数据 ...
 		String islogin = redisTemplate.opsForValue().get(BasicConstant.ROUTE_PREFIX + chat.getUserId());
 		if(StringUtil.isEmpty(islogin)){

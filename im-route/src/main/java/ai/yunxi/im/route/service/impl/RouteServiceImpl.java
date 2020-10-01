@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 
-import ai.yunxi.im.common.pojo.ChatInfo;
+import ai.yunxi.im.common.pojo.ImMessage;
 import ai.yunxi.im.route.service.RouteService;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -30,15 +30,15 @@ public class RouteServiceImpl implements RouteService {
     private OkHttpClient okHttpClient;
 
 	@Override
-	public void sendMessage(String url, ChatInfo chat) throws IOException {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("command",chat.getCommand());
-		jsonObject.put("time",chat.getTime());
-		jsonObject.put("userId",chat.getUserId());
-		jsonObject.put("content",chat.getContent());
-
-		RequestBody requestBody = RequestBody.create(mediaType,jsonObject.toString());
-
+	public void sendMessage(String url, ImMessage chat) throws IOException {
+//		JSONObject jsonObject = new JSONObject();
+//		jsonObject.put("command",chat.getType());
+//		jsonObject.put("time",chat.getCurrentTime());
+//		jsonObject.put("userId",chat.getUserId());
+//		jsonObject.put("content",chat.getContent());
+		String json= JSONObject.toJSONString(chat);
+//		RequestBody requestBody = RequestBody.create(mediaType,jsonObject.toString());
+		RequestBody requestBody = RequestBody.create(mediaType,json);
 		Request request = new Request.Builder()
 		        .url(url)
 		        .post(requestBody)

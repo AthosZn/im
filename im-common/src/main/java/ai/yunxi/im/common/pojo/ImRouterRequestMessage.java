@@ -14,7 +14,17 @@ public class ImRouterRequestMessage implements Serializable {
 
     private static final long serialVersionUID = 4836768833746970531L;
 
-    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+    public ImRouterRequestMessage(List<Long> uids, Integer type, Object data) {
+        this.uids = uids;
+        this.type = type;
+        this.data = data;
+    }
+
+    public ImRouterRequestMessage(Long uid, Integer type, Object data) {
+        this.uids.add(uid);
+        this.type = type;
+        this.data = data;
+    }
 
     /**
      * 消息id
@@ -28,12 +38,12 @@ public class ImRouterRequestMessage implements Serializable {
     /**
      * 消息类型，
      */
-    private String type = MessageConstant.CHAT;
+    private int type = MessageConstant.CHAT;
 
     /**
      * 消息数据
      */
-    private String data = "{}";
+    private Object data = null;
 
     /**
      * 时间戳
@@ -68,15 +78,15 @@ public class ImRouterRequestMessage implements Serializable {
         this.uids = uids;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 

@@ -2,6 +2,7 @@ package ai.yunxi.im.server.init;
 
 import javax.annotation.PostConstruct;
 
+import ai.yunxi.im.common.protocol.MessageProto;
 import ai.yunxi.im.server.handle.WebsocketServerHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;

@@ -48,5 +48,12 @@ java -jar im-client\target\im-client-0.0.1-SNAPSHOT.jar --server.port=8071 --im.
 java -jar im-client\target\im-client-0.0.1-SNAPSHOT.jar --server.port=8072 --im.user.id=1002 --im.user.userName=Luffy
 ```	
 
-
+6、生成protoc
 protoc --js_out=import_style=commonjs,binary:. testmessage.proto
+protoc --java_out=./ ./dto_message.proto
+
+protoc --js_out=import_style=commonjs,binary:. dto_message.proto
+
+ protoc --java_out=./ ./MessageProto.proto
+
+

@@ -1,0 +1,27 @@
+syntax = "proto3";
+option java_multiple_files = false;
+option java_package = "ai.yunxi.im.common.protocol";
+option java_outer_classname = "MessageProto";
+
+package com.hepi.im.proto.message;
+
+//////////////////////////////////////////////
+//              哈匹消息类                   //
+//////////////////////////////////////////////
+message MessageProtocol {
+    string id = 1;
+    SingleMessage msg = 2; // 消息数组
+    int64 time = 3; // timestmap
+    bool ack = 4;
+    int32 command = 5;
+    int32 userId = 6;
+}
+
+// 消息内容
+message SingleMessage{
+    string id = 1;
+    int32 type = 2; // 业务相关二级code  对应 MessageType
+    string content = 3; // json, 由biz与客户端定义 { }
+    int64 t = 4; // timestmap
+}
+

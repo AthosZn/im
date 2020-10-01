@@ -52,7 +52,8 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 			MessageProto.MessageProtocol heartBeat = MessageProto.MessageProtocol.newBuilder()
 					.setCommand(MessageConstant.PONG)
 					.setTime(System.currentTimeMillis())
-					.setContent(MessageConstant.PONG)
+//			         SingleMessage.Builder msg = SingleMessage.newBuilder();
+//					.setMsg(MessageProto.SingleMessage.getDefaultInstance())
 					.setUserId(userId).build();
 			ctx.channel().writeAndFlush(heartBeat);
 		}

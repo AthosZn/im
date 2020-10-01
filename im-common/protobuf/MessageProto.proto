@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package protocol;
 
@@ -6,10 +6,10 @@ option java_package = "ai.yunxi.im.common.protocol";
 option java_outer_classname = "MessageProto";
 
 message MessageProtocol {
-
-  required string command = 1;
-  required int64 time = 2;
-  required int32 userId = 3;
-  required string content = 4;
-
+  string id = 1;
+  string content = 2; // 消息数组
+  int64 time = 3; // timestmap
+  bool ack = 4;
+  int32 command = 5;
+  int32 userId = 6;
 }

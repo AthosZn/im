@@ -2,7 +2,7 @@ package ai.yunxi.im.route.service;
 
 import java.io.IOException;
 
-import ai.yunxi.im.common.pojo.ChatInfo;
+import ai.yunxi.im.common.pojo.ImMessage;
 
 /**
  *
@@ -12,6 +12,6 @@ import ai.yunxi.im.common.pojo.ChatInfo;
  */
 public interface RouteService {
 
-	public void sendMessage(String url, ChatInfo chat) throws IOException;
+	public void sendMessage(String url, ImMessage chat) throws IOException;
 
 }
