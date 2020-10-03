@@ -14,4 +14,6 @@ public interface RouteService {
 
 	public void sendMessage(String url, ImMessage chat) throws IOException;
 
+	void zkSend(ImMessage chat);
+
 }

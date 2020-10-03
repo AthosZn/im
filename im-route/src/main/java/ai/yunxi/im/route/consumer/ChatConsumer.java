@@ -1,7 +1,9 @@
 package ai.yunxi.im.route.consumer;
 
 import ai.yunxi.im.common.constant.KakfaTopicConstant;
+import ai.yunxi.im.common.pojo.ChatInfo;
 import ai.yunxi.im.common.pojo.ImRouterRequestMessage;
+import ai.yunxi.im.route.service.RouteService;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -24,7 +26,8 @@ import java.awt.print.Book;
 public class ChatConsumer {
 
     private final Gson gson = new Gson();
-
+    @Override
+    private RouteService routeService;
 
     // 简单消费者
     @KafkaListener(groupId = "group1", topics = KakfaTopicConstant.CHAT)
@@ -33,7 +36,7 @@ public class ChatConsumer {
 //        log.info("consumer content = {}",consumer);
         ImRouterRequestMessage imRouterRequestMessage = gson.fromJson(String.valueOf(record.value()),ImRouterRequestMessage.class);
         ack.acknowledge();
-
+        routeService.zkSend(imRouterRequestMessage.getData());
         /*
          * 如果需要手工提交异步 consumer.commitSync();
          * 手工同步提交 consumer.commitAsync()
@@ -46,6 +49,7 @@ public class ChatConsumer {
         log.info("2单独消费者消费消息group1_2,topic= {} ,content = {}",topic,record.value());
 //        log.info("consumer content = {}",consumer);
         ack.acknowledge();
+
 
         /*
          * 如果需要手工提交异步 consumer.commitSync();

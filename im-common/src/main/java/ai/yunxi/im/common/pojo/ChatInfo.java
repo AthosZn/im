@@ -37,5 +37,90 @@ public class ChatInfo implements Serializable {
     //是否发送apns
     private boolean sendApns = true;
 
+    public String getContent() {
+        return content;
+    }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public long getFromUid() {
+        return fromUid;
+    }
+
+    public void setFromUid(long fromUid) {
+        this.fromUid = fromUid;
+    }
+
+    public String getFromAvatar() {
+        return fromAvatar;
+    }
+
+    public void setFromAvatar(String fromAvatar) {
+        this.fromAvatar = fromAvatar;
+    }
+
+    public String getFromNickName() {
+        return fromNickName;
+    }
+
+    public void setFromNickName(String fromNickName) {
+        this.fromNickName = fromNickName;
+    }
+
+    public long getToId() {
+        return toId;
+    }
+
+    public void setToId(long toId) {
+        this.toId = toId;
+    }
+
+    public int getCommand() {
+        return command;
+    }
+
+    public void setCommand(int command) {
+        this.command = command;
+    }
+
+    public int getIsOrigin() {
+        return isOrigin;
+    }
+
+    public void setIsOrigin(int isOrigin) {
+        this.isOrigin = isOrigin;
+    }
+
+    public long getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(long currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public boolean isSendApns() {
+        return sendApns;
+    }
+
+    public void setSendApns(boolean sendApns) {
+        this.sendApns = sendApns;
+    }
+
+    @Override
+    public String toString() {
+        return "ChatInfo{" +
+                "content='" + content + '\'' +
+                ", fromUid=" + fromUid +
+                ", fromAvatar='" + fromAvatar + '\'' +
+                ", fromNickName='" + fromNickName + '\'' +
+                ", toId=" + toId +
+                ", command=" + command +
+                ", isOrigin=" + isOrigin +
+                ", currentTime=" + currentTime +
+                ", sendApns=" + sendApns +
+                '}';
+    }
 }
