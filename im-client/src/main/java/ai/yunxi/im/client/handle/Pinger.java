@@ -52,7 +52,7 @@ public class Pinger extends ChannelInboundHandlerAdapter {
                     MessageProto.MessageProtocol heartBeat = MessageProto.MessageProtocol.newBuilder()
                             .setCommand(MessageConstant.PING)
                             .setTime(System.currentTimeMillis())
-                            .setContent(MessageConstant.PING)
+                            .setContent(String.valueOf(MessageConstant.PING))
                             .setUserId(conf.getUserId()).build();
                     channel.writeAndFlush(heartBeat);
                 } else {

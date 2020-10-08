@@ -26,7 +26,7 @@ import java.awt.print.Book;
 public class ChatConsumer {
 
     private final Gson gson = new Gson();
-    @Override
+    @Resource
     private RouteService routeService;
 
     // 简单消费者
@@ -44,7 +44,7 @@ public class ChatConsumer {
     }
 
     // 简单消费者
-    @KafkaListener(groupId = "group1", topics = KakfaTopicConstant.CHAT)
+//    @KafkaListener(groupId = "group1", topics = KakfaTopicConstant.CHAT)
     public void consumer1_2(ConsumerRecord<String, ImRouterRequestMessage> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, Consumer consumer, Acknowledgment ack) {
         log.info("2单独消费者消费消息group1_2,topic= {} ,content = {}",topic,record.value());
 //        log.info("consumer content = {}",consumer);

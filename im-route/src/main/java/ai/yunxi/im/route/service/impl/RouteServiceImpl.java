@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 
-import ai.yunxi.im.common.pojo.ImMessage;
+import ai.yunxi.im.common.pojo.ChatInfo;
 import ai.yunxi.im.route.service.RouteService;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -31,7 +31,7 @@ public class RouteServiceImpl implements RouteService {
     private ZKUtil zk;
 
     @Override
-    public void sendMessage(String url, ImMessage chat) throws IOException {
+    public void sendMessage(String url, ChatInfo chat) throws IOException {
 //		JSONObject jsonObject = new JSONObject();
 //		jsonObject.put("command",chat.getType());
 //		jsonObject.put("time",chat.getCurrentTime());
@@ -52,7 +52,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void zkSend(ImMessage chat) {
+    public void zkSend(ChatInfo chat) {
         try {
             //从ZK拿到所有节点，分发消息
             List<String> all = zk.getAllNode();

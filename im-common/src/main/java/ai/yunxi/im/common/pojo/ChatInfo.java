@@ -14,7 +14,7 @@ public class ChatInfo implements Serializable {
     private String content;
 
     //消息发送者
-    private long fromUid;
+    private int fromUid;
 
     //消息发送者头像
     private String fromAvatar;
@@ -23,7 +23,7 @@ public class ChatInfo implements Serializable {
     private String fromNickName;
 
     //消息接收者
-    private long toId;
+    private int toId;
 
     //消息类型
     private int command;
@@ -37,8 +37,15 @@ public class ChatInfo implements Serializable {
     //是否发送apns
     private boolean sendApns = true;
 
+    public ChatInfo( int command, long currentTime, int toId,String content) {
+        this.content = content;
+        this.toId = toId;
+        this.command = command;
+        this.currentTime = currentTime;
+    }
+
     public String getContent() {
-        return content;
+        return content==null?"":content;
     }
 
     public void setContent(String content) {
@@ -49,7 +56,7 @@ public class ChatInfo implements Serializable {
         return fromUid;
     }
 
-    public void setFromUid(long fromUid) {
+    public void setFromUid(int fromUid) {
         this.fromUid = fromUid;
     }
 
@@ -69,11 +76,11 @@ public class ChatInfo implements Serializable {
         this.fromNickName = fromNickName;
     }
 
-    public long getToId() {
+    public int getToId() {
         return toId;
     }
 
-    public void setToId(long toId) {
+    public void setToId(int toId) {
         this.toId = toId;
     }
 

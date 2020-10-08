@@ -3,7 +3,6 @@ package ai.yunxi.im.server.init;
 import javax.annotation.PostConstruct;
 
 import ai.yunxi.im.common.protocol.MessageProto;
-import ai.yunxi.im.server.handle.WebsocketServerHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
  * @createTime 2019年2月27日 下午1:35:52
  *
  */
-@Component
+//@Component
 public class IMServerInit {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMServerInit.class);

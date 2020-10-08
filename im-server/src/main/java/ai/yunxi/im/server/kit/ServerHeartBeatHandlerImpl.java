@@ -1,6 +1,7 @@
 package ai.yunxi.im.server.kit;
 
 import ai.yunxi.im.common.constant.BasicConstant;
+import ai.yunxi.im.common.utils.NettyAttrUtil;
 import ai.yunxi.im.server.config.InitConfiguration;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
@@ -33,22 +34,23 @@ public class ServerHeartBeatHandlerImpl implements HeartBeatHandler {
 
     @Override
     public void process(ChannelHandlerContext ctx) throws Exception {
-        int userId= ctx.channel().attr(userIdKey).get();
-        redisTemplate.opsForValue().getOperations().delete(BasicConstant.ROUTE_PREFIX+  userId);
-        LOGGER.info("路由端处理了用户下线逻辑："+userId);
-        ctx.channel().close();
+//        int userId= ctx.channel().attr(userIdKey).get();
+//        redisTemplate.opsForValue().getOperations().delete(BasicConstant.ROUTE_PREFIX+  userId);
+//        LOGGER.info("路由端处理了用户下线逻辑："+userId);
+//        ctx.channel().close();
 
-//        long heartBeatTime = conf.getHeartbeatTime() * 1000;
-//
-//        Long lastReadTime = NettyAttrUtil.getReaderTime(ctx.channel());
-//        long now = System.currentTimeMillis();
-//        if (lastReadTime != null && now - lastReadTime > heartBeatTime){
-//            CIMUserInfo userInfo = SessionSocketHolder.getUserId((NioSocketChannel) ctx.channel());
-//            if (userInfo != null){
-//                LOGGER.warn("客户端[{}]心跳超时[{}]ms，需要关闭连接!",userInfo.getUserName(),now - lastReadTime);
-//            }
+        long heartBeatTime = conf.getHeartbeatTime() * 1000;
+
+        Long lastReadTime = NettyAttrUtil.getReaderTime(ctx.channel());
+        long now = System.currentTimeMillis();
+        if (lastReadTime != null && now - lastReadTime > heartBeatTime){
+            Integer userId= ctx.channel().attr(userIdKey).get();
+            if (userId != null){
+                LOGGER.warn("客户端[{}]心跳超时[{}]ms，需要关闭连接!",userId,now - lastReadTime);
+            }
+            redisTemplate.opsForValue().getOperations().delete(BasicConstant.ROUTE_PREFIX+  userId);
 //            routeHandler.userOffLine(userInfo, (NioSocketChannel) ctx.channel());
-//            ctx.channel().close();
-//        }
+            ctx.channel().close();
+        }
     }
 }

@@ -19,7 +19,7 @@ import ai.yunxi.im.client.config.InitConfiguration;
 import ai.yunxi.im.client.handle.IMClientHandle;
 import ai.yunxi.im.common.constant.BasicConstant;
 import ai.yunxi.im.common.constant.MessageConstant;
-import ai.yunxi.im.common.pojo.ImMessage;
+import ai.yunxi.im.common.pojo.ChatInfo;
 import ai.yunxi.im.common.pojo.ServerInfo;
 import ai.yunxi.im.common.protocol.MessageProto;
 import io.netty.bootstrap.Bootstrap;
@@ -168,12 +168,12 @@ public class IMClientInit {
 	/**
 	 * 客户端发送消息
 	 **/
-	public void sendMessage(ImMessage chat){
+	public void sendMessage(ChatInfo chat){
 		try {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("command",chat.getCommand());
-			jsonObject.put("time",chat.getTime());
-			jsonObject.put("userId",chat.getUserId());
+			jsonObject.put("time",chat.getCurrentTime());
+			jsonObject.put("userId",chat.getToId());
 			jsonObject.put("content",chat.getContent());
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
 

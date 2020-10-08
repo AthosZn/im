@@ -9,7 +9,7 @@ import ai.yunxi.im.client.config.InitConfiguration;
 import ai.yunxi.im.client.config.SpringBeanFactory;
 import ai.yunxi.im.client.init.IMClientInit;
 import ai.yunxi.im.common.constant.MessageConstant;
-import ai.yunxi.im.common.pojo.ImMessage;
+import ai.yunxi.im.common.pojo.ChatInfo;
 import ai.yunxi.im.common.utils.StringUtil;
 
 public class Scan implements Runnable {
@@ -50,7 +50,7 @@ public class Scan implements Runnable {
 				}
 
 				//调用Route端API进行消息发送
-				ImMessage chat = new ImMessage(MessageConstant.CHAT, System.currentTimeMillis(), conf.getUserId(), msg);
+				ChatInfo chat = new ChatInfo(MessageConstant.CHAT, System.currentTimeMillis(), conf.getUserId(), msg);
 				client.sendMessage(chat);
 			}
 		} catch (Exception e) {

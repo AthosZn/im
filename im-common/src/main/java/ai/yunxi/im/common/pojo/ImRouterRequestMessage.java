@@ -14,13 +14,13 @@ public class ImRouterRequestMessage implements Serializable {
 
     private static final long serialVersionUID = 4836768833746970531L;
 
-    public ImRouterRequestMessage(List<Long> uids, Integer type, Object data) {
+    public ImRouterRequestMessage(List<Long> uids, Integer type, ChatInfo data) {
         this.uids = uids;
         this.type = type;
         this.data = data;
     }
 
-    public ImRouterRequestMessage(Long uid, Integer type, Object data) {
+    public ImRouterRequestMessage(Long uid, Integer type, ChatInfo data) {
         this.uids.add(uid);
         this.type = type;
         this.data = data;
@@ -43,7 +43,7 @@ public class ImRouterRequestMessage implements Serializable {
     /**
      * 消息数据
      */
-    private Object data = null;
+    private ChatInfo data;
 
     /**
      * 时间戳
@@ -60,7 +60,7 @@ public class ImRouterRequestMessage implements Serializable {
      * 超时不重发 毫秒数  10分钟后不重发即 10 * 60 * 1000l
      * 如果resend = false 即不用设置当前值
      */
-    private long expiredTime;
+    private long expiredObjectime;
 
     public String getMessageId() {
         return messageId;
@@ -78,27 +78,27 @@ public class ImRouterRequestMessage implements Serializable {
         this.uids = uids;
     }
 
-    public Integer getType() {
+    public Integer getObjectype() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setObjectype(Integer type) {
         this.type = type;
     }
 
-    public Object getData() {
+    public ChatInfo getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(ChatInfo data) {
         this.data = data;
     }
 
-    public long getTimestamp() {
+    public long getObjectimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setObjectimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -110,12 +110,12 @@ public class ImRouterRequestMessage implements Serializable {
         this.resend = resend;
     }
 
-    public long getExpiredTime() {
-        return expiredTime;
+    public long getExpiredObjectime() {
+        return expiredObjectime;
     }
 
-    public void setExpiredTime(long expiredTime) {
-        this.expiredTime = expiredTime;
+    public void setExpiredObjectime(long expiredObjectime) {
+        this.expiredObjectime = expiredObjectime;
     }
 
     @Override
@@ -127,7 +127,7 @@ public class ImRouterRequestMessage implements Serializable {
                 ", data='" + data + '\'' +
                 ", timestamp=" + timestamp +
                 ", resend=" + resend +
-                ", expiredTime=" + expiredTime +
+                ", expiredObjectime=" + expiredObjectime +
                 '}';
     }
 }

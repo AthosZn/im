@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ai.yunxi.im.common.constant.BasicConstant;
-import ai.yunxi.im.common.pojo.ImMessage;
+import ai.yunxi.im.common.pojo.ChatInfo;
 import ai.yunxi.im.common.pojo.ServerInfo;
 import ai.yunxi.im.common.pojo.UserInfo;
 import ai.yunxi.im.common.utils.StringUtil;
@@ -66,7 +66,9 @@ public class IMRouteController {
 			e.printStackTrace();
 		}
 		String[] serv = server.split("-");
-		ServerInfo serviceInfo = new ServerInfo(serv[0], Integer.parseInt(serv[1]), Integer.parseInt(serv[2]));
+	    String[] ips=serv[0].split("/");
+	    String ip=ips.length>1?ips[2]:ips[0];
+		ServerInfo serviceInfo = new ServerInfo(ip, Integer.parseInt(serv[1]), Integer.parseInt(serv[2]));
 		return serviceInfo;
 	}
 
@@ -74,7 +76,7 @@ public class IMRouteController {
 //	 * 分发消息
 //	 **/
 //	@RequestMapping(value="/chat", method=RequestMethod.POST)
-//	public void chat(@RequestBody ImMessage chat){
+//	public void chat(@RequestBody ChatInfo chat){
 //		//判断userId是否登录——从缓存取数据 ...
 //		String islogin = redisTemplate.opsForValue().get(BasicConstant.ROUTE_PREFIX + chat.getUserId());
 //		if(StringUtil.isEmpty(islogin)){

@@ -29,22 +29,22 @@ public class ClientProcessor {
     private InitConfiguration conf;
 
 	public void down(Integer userId){
-		try {
+//		try {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId",userId);
 			RequestBody requestBody = RequestBody.create(BasicConstant.MEDIA_TYPE,jsonObject.toString());
 
-			Request request = new Request.Builder()
-			        .url(conf.getRouteLogoutUrl())
-			        .post(requestBody)
-			        .build();
-
-			Response response = okHttpClient.newCall(request).execute() ;
-			if (!response.isSuccessful()){
-			    throw new IOException("Unexpected code " + response);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//			Request request = new Request.Builder()
+//			        .url(conf.getRouteLogoutUrl())
+//			        .post(requestBody)
+//			        .build();
+//
+//			Response response = okHttpClient.newCall(request).execute() ;
+//			if (!response.isSuccessful()){
+//			    throw new IOException("Unexpected code " + response);
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 }
