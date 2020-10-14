@@ -1,9 +1,6 @@
 package ai.yunxi.im.server.handle;
 
-import ai.yunxi.im.common.protocol.MessageProto;
 import ai.yunxi.im.common.utils.Util;
-import ai.yunxi.im.server.init.IMWebSocketServerInit;
-import com.sun.jndi.toolkit.url.UrlUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
@@ -15,7 +12,6 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.CloseWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.PingWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.PongWebSocketFrame;
@@ -25,11 +21,8 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
-import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Date;
 
 import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
 import static io.netty.handler.codec.http.HttpHeaderNames.HOST;
@@ -44,7 +37,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     private final static Logger LOGGER = LoggerFactory.getLogger(WebSocketServerHandler.class);
     // websocket 服务的 uri
     private static final String WEBSOCKET_PATH = "/websocket";
-    private AttributeKey<Integer> userId = AttributeKey.valueOf("userId");
+    private AttributeKey<Long> userId = AttributeKey.valueOf("userId");
     private ChannelMap CHANNEL_MAP = ChannelMap.newInstance();
 
     @Override
@@ -93,7 +86,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         } else {
             ChannelFuture channelFuture =handshaker.handshake(ctx.channel(), req);
             if (channelFuture.isSuccess()) {
-                Integer uid= Integer.valueOf(Util.getParamByUrl(req.uri(),"userId"));
+                Long uid= Long.valueOf(Util.getParamByUrl(req.uri(),"userId"));
                 ctx.channel().attr(userId).set(uid);
                 CHANNEL_MAP.putClient(uid, ctx.channel());
                 LOGGER.info("---客户端登录成功。userId:"+uid);

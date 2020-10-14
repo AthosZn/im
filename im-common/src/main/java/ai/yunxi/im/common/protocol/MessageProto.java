@@ -73,10 +73,16 @@ public final class MessageProto {
     int getCommand();
 
     /**
-     * <code>int32 userId = 6;</code>
+     * <code>int64 userId = 6;</code>
      * @return The userId.
      */
-    int getUserId();
+    long getUserId();
+
+    /**
+     * <code>int64 toUserId = 7;</code>
+     * @return The toUserId.
+     */
+    long getToUserId();
   }
   /**
    * Protobuf type {@code protocol.MessageProtocol}
@@ -154,7 +160,12 @@ public final class MessageProto {
             }
             case 48: {
 
-              userId_ = input.readInt32();
+              userId_ = input.readInt64();
+              break;
+            }
+            case 56: {
+
+              toUserId_ = input.readInt64();
               break;
             }
             default: {
@@ -304,13 +315,23 @@ public final class MessageProto {
     }
 
     public static final int USERID_FIELD_NUMBER = 6;
-    private int userId_;
+    private long userId_;
     /**
-     * <code>int32 userId = 6;</code>
+     * <code>int64 userId = 6;</code>
      * @return The userId.
      */
-    public int getUserId() {
+    public long getUserId() {
       return userId_;
+    }
+
+    public static final int TOUSERID_FIELD_NUMBER = 7;
+    private long toUserId_;
+    /**
+     * <code>int64 toUserId = 7;</code>
+     * @return The toUserId.
+     */
+    public long getToUserId() {
+      return toUserId_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -342,8 +363,11 @@ public final class MessageProto {
       if (command_ != 0) {
         output.writeInt32(5, command_);
       }
-      if (userId_ != 0) {
-        output.writeInt32(6, userId_);
+      if (userId_ != 0L) {
+        output.writeInt64(6, userId_);
+      }
+      if (toUserId_ != 0L) {
+        output.writeInt64(7, toUserId_);
       }
       unknownFields.writeTo(output);
     }
@@ -372,9 +396,13 @@ public final class MessageProto {
         size += com.google.protobuf.CodedOutputStream
                 .computeInt32Size(5, command_);
       }
-      if (userId_ != 0) {
+      if (userId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-                .computeInt32Size(6, userId_);
+                .computeInt64Size(6, userId_);
+      }
+      if (toUserId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeInt64Size(7, toUserId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -403,6 +431,8 @@ public final class MessageProto {
               != other.getCommand()) return false;
       if (getUserId()
               != other.getUserId()) return false;
+      if (getToUserId()
+              != other.getToUserId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -427,7 +457,11 @@ public final class MessageProto {
       hash = (37 * hash) + COMMAND_FIELD_NUMBER;
       hash = (53 * hash) + getCommand();
       hash = (37 * hash) + USERID_FIELD_NUMBER;
-      hash = (53 * hash) + getUserId();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+              getUserId());
+      hash = (37 * hash) + TOUSERID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+              getToUserId());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -571,7 +605,9 @@ public final class MessageProto {
 
         command_ = 0;
 
-        userId_ = 0;
+        userId_ = 0L;
+
+        toUserId_ = 0L;
 
         return this;
       }
@@ -605,6 +641,7 @@ public final class MessageProto {
         result.ack_ = ack_;
         result.command_ = command_;
         result.userId_ = userId_;
+        result.toUserId_ = toUserId_;
         onBuilt();
         return result;
       }
@@ -670,8 +707,11 @@ public final class MessageProto {
         if (other.getCommand() != 0) {
           setCommand(other.getCommand());
         }
-        if (other.getUserId() != 0) {
+        if (other.getUserId() != 0L) {
           setUserId(other.getUserId());
+        }
+        if (other.getToUserId() != 0L) {
+          setToUserId(other.getToUserId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -976,32 +1016,62 @@ public final class MessageProto {
         return this;
       }
 
-      private int userId_ ;
+      private long userId_ ;
       /**
-       * <code>int32 userId = 6;</code>
+       * <code>int64 userId = 6;</code>
        * @return The userId.
        */
-      public int getUserId() {
+      public long getUserId() {
         return userId_;
       }
       /**
-       * <code>int32 userId = 6;</code>
+       * <code>int64 userId = 6;</code>
        * @param value The userId to set.
        * @return This builder for chaining.
        */
-      public Builder setUserId(int value) {
+      public Builder setUserId(long value) {
 
         userId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 userId = 6;</code>
+       * <code>int64 userId = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearUserId() {
 
-        userId_ = 0;
+        userId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long toUserId_ ;
+      /**
+       * <code>int64 toUserId = 7;</code>
+       * @return The toUserId.
+       */
+      public long getToUserId() {
+        return toUserId_;
+      }
+      /**
+       * <code>int64 toUserId = 7;</code>
+       * @param value The toUserId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setToUserId(long value) {
+
+        toUserId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 toUserId = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearToUserId() {
+
+        toUserId_ = 0L;
         onChanged();
         return this;
       }
@@ -1072,11 +1142,12 @@ public final class MessageProto {
           descriptor;
   static {
     java.lang.String[] descriptorData = {
-            "\n\022MessageProto.proto\022\010protocol\"j\n\017Messag" +
+            "\n\022MessageProto.proto\022\010protocol\"|\n\017Messag" +
                     "eProtocol\022\n\n\002id\030\001 \001(\t\022\017\n\007content\030\002 \001(\t\022\014" +
                     "\n\004time\030\003 \001(\003\022\013\n\003ack\030\004 \001(\010\022\017\n\007command\030\005 \001" +
-                    "(\005\022\016\n\006userId\030\006 \001(\005B+\n\033ai.yunxi.im.common" +
-                    ".protocolB\014MessageProtob\006proto3"
+                    "(\005\022\016\n\006userId\030\006 \001(\003\022\020\n\010toUserId\030\007 \001(\003B+\n\033" +
+                    "ai.yunxi.im.common.protocolB\014MessageProt" +
+                    "ob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
             .internalBuildGeneratedFileFrom(descriptorData,
@@ -1087,7 +1158,7 @@ public final class MessageProto {
     internal_static_protocol_MessageProtocol_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_protocol_MessageProtocol_descriptor,
-            new java.lang.String[] { "Id", "Content", "Time", "Ack", "Command", "UserId", });
+            new java.lang.String[] { "Id", "Content", "Time", "Ack", "Command", "UserId", "ToUserId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

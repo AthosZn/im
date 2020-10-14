@@ -16,7 +16,7 @@ import io.netty.channel.Channel;
 public class ChannelMap {
 
 	private static ChannelMap instance;
-	private final Map<Integer, Channel> CHANNEL_MAP = new ConcurrentHashMap<Integer, Channel>();
+	private final Map<Long, Channel> CHANNEL_MAP = new ConcurrentHashMap<Long, Channel>();
 
 	private ChannelMap() {
 	}
@@ -27,11 +27,11 @@ public class ChannelMap {
 		return instance;
 	}
 
-	public Map<Integer, Channel> getCHANNEL_MAP() {
+	public Map<Long, Channel> getCHANNEL_MAP() {
 		return CHANNEL_MAP;
 	}
 
-	public void putClient(Integer userId, Channel channel){
+	public void putClient(Long userId, Channel channel){
 		CHANNEL_MAP.put(userId, channel);
 	}
 

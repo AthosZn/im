@@ -31,6 +31,11 @@
 		<artifactId>fastjson</artifactId>
 		<version>1.2.31</version>
 	</dependency>
+	  <dependency>
+		  <groupId>org.projectlombok</groupId>
+		  <artifactId>lombok</artifactId>
+		  <version>1.18.10</version>
+	  </dependency>
   </dependencies>
   <modules>
   	<module>im-server</module>

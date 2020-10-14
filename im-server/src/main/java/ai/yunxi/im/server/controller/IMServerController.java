@@ -30,7 +30,7 @@ public class IMServerController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IMServerController.class);
 	private ChannelMap CHANNEL_MAP = ChannelMap.newInstance();
-	private AttributeKey<Integer> userId = AttributeKey.valueOf("userId");
+	private AttributeKey<Long> userId = AttributeKey.valueOf("userId");
 	/**
 	 * 服务端接收消息，并推送到指定客户端
 	 **/
@@ -45,11 +45,11 @@ public class IMServerController {
 		//2.根据消息发送给指定客户端（群发）
 		//   根据userID，从本地Map集合中得到对应的客户端Channel，发送消息
 		if(MessageConstant.CHAT.equals(message.getCommand())||MessageConstant.FRIEND_ASK.equals(message.getCommand())){
-			for (Entry<Integer, Channel> entry : CHANNEL_MAP.getCHANNEL_MAP().entrySet()) {
+			for (Entry<Long, Channel> entry : CHANNEL_MAP.getCHANNEL_MAP().entrySet()) {
 				//过滤客户端本身
-				if(entry.getKey() != message.getUserId()){
+				if(entry.getKey() != message.getToUserId()){
 					LOGGER.info("----服务端向"+entry.getValue().attr(userId).get()+"发送了消息，来自userId="+message.getUserId()+", content="+message.getContent());
-					entry.getValue().writeAndFlush(message);
+					entry.getValue().writeAndFlush(message.toByteArray());
 				}
 			}
 		}

@@ -9,4 +9,6 @@ public class KakfaTopicConstant {
 
 	public static final String CHAT="CHAT_TOPIC";
 
+	public static final String IMDB="IM_DB_TOPIC";
+
 }

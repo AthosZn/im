@@ -11,5 +11,6 @@ message MessageProtocol {
   int64 time = 3; // timestmap
   bool ack = 4;
   int32 command = 5;
-  int32 userId = 6;
+  int64 userId = 6;
+  int64 toUserId = 7;
 }

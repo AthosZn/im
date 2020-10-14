@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import tk.mybatis.spring.annotation.MapperScan;
 
 import ai.yunxi.im.server.zk.RegisterToZK;
 
@@ -15,6 +16,7 @@ import ai.yunxi.im.server.zk.RegisterToZK;
  *
  */
 @SpringBootApplication
+@MapperScan(basePackages = {"com.myu.console.biz*.**.mapper","com.dmc.mapper"})
 public class IMServerApplication implements CommandLineRunner {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMServerApplication.class);

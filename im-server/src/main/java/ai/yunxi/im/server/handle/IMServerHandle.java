@@ -24,7 +24,7 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IMServerHandle.class);
 
-	private AttributeKey<Integer> userId = AttributeKey.valueOf("userId");
+	private AttributeKey<Long> userId = AttributeKey.valueOf("userId");
 
 	private ChannelMap CHANNEL_MAP = ChannelMap.newInstance();
 
@@ -67,7 +67,7 @@ public class IMServerHandle extends ChannelInboundHandlerAdapter {
 	 */
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		Integer uid = ctx.channel().attr(userId).get();
+		Long uid = ctx.channel().attr(userId).get();
 		//从Channel缓存删除客户端
 		CHANNEL_MAP.getCHANNEL_MAP().remove(uid);
 		clientProcessor.down(uid);

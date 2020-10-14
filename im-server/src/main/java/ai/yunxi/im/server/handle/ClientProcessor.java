@@ -28,7 +28,7 @@ public class ClientProcessor {
     @Autowired
     private InitConfiguration conf;
 
-	public void down(Integer userId){
+	public void down(Long userId){
 //		try {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("userId",userId);
