@@ -49,7 +49,7 @@ public class IMServerController {
 				//过滤客户端本身
 				if(entry.getKey() != message.getToUserId()){
 					LOGGER.info("----服务端向"+entry.getValue().attr(userId).get()+"发送了消息，来自userId="+message.getUserId()+", content="+message.getContent());
-					entry.getValue().writeAndFlush(message.toByteArray());
+					entry.getValue().writeAndFlush(message);
 				}
 			}
 		}

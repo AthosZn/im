@@ -47,12 +47,12 @@ public class ChatInfo implements Serializable {
         this.currentTime = currentTime;
     }
 
-    public ChatInfo(long fromUid, int command, long currentTime, long toId,String content) {
+    public ChatInfo(long fromUid,int command, long toId,String content) {
         this.fromUid=fromUid;
         this.content = content;
         this.toId = toId;
         this.command = command;
-        this.currentTime = currentTime;
+        this.currentTime = System.currentTimeMillis();
     }
 
     public String getContent() {

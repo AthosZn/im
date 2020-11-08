@@ -36,6 +36,7 @@ public class ChatConsumer {
 //        log.info("consumer content = {}",consumer);
         ImRouterRequestMessage imRouterRequestMessage = gson.fromJson(String.valueOf(record.value()),ImRouterRequestMessage.class);
         ack.acknowledge();
+
         routeService.zkSend(imRouterRequestMessage.getData());
         /*
          * 如果需要手工提交异步 consumer.commitSync();

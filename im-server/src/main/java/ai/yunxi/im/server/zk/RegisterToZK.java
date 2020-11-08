@@ -2,6 +2,7 @@ package ai.yunxi.im.server.zk;
 
 import ai.yunxi.im.server.config.InitConfiguration;
 import ai.yunxi.im.server.config.SpringBeanFactory;
+import ai.yunxi.im.server.util.AddressUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +26,7 @@ public class RegisterToZK implements Runnable {
 			String ip = InetAddress.getLocalHost().getHostAddress();
 			int httpPort = conf.getHttpPort();
 			int nettyPort = conf.getNettyPort();
+		    ip=AddressUtils.getInstance().getInnetIp();
 			LOGGER.info("---服务端注册到Zookeeper. ip:"+ip+"; httpPort:"+httpPort+"; nettyPort:"+nettyPort);
 
 			//创建父节点 持久化节点
